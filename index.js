@@ -18,7 +18,6 @@ app.get("/", async (req, res) => {
 app.get("/student/:phone", async (req, res) => {
     try {
         const userPhone = req.params.phone;
-        console.log(userPhone)
         const fetchResult = await student.find({ phone: userPhone });
         res.send(fetchResult);
     } catch (error) {
@@ -30,28 +29,28 @@ app.post("/students", async (req, res) => {
         let data = req.body;
         const user = new student(data);
         const result = await user.save();
-        res.send("Data Saved Sucessfully");
+        res.send(result);
     } catch (error) {
         console.log(error);
     }
 })
-app.patch("/update", async (req, res) => {
+
+app.patch("/students/:id", async (req, res) => {
     try {
+        let id = req.params.id;
         let data = req.body;
-        console.log(data);
-        const fetchResult = await student.updateOne({ _id: '63b87049f27bc66aa9464db1' }, { $set: { data } });
-        res.send("Update sucessfully");
+        const fetchResult = await student.updateOne({ _id: id }, { $set: data });
+        res.send(fetchResult);
 
     } catch (error) {
         console.log(error);
     }
 })
-app.delete("/delete", async (req, res) => {
+app.delete("/students/:id", async (req, res) => {
     try {
-        let data = req.body;
-        console.log(data._id);
-        const fetchResult = await student.deleteOne({ _id: data._id });
-        res.send("Data Deleted Sucessfully");
+        let id = req.params.id;
+        const fetchResult = await student.deleteOne({ _id: id });
+        res.send(fetchResult);
     } catch (error) {
         console.log(error);
     }
