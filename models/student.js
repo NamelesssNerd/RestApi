@@ -17,8 +17,5 @@ const studentSchema = new mongoose.Schema({
 }, {
     versionKey: false
 });
-
 const student = new mongoose.model("student", studentSchema);
-
-
 module.exports = student;
