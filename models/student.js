@@ -14,6 +14,8 @@ const studentSchema = new mongoose.Schema({
         }
     },
     phone: Number
+}, {
+    versionKey: false
 });
 
 const student = new mongoose.model("student", studentSchema);
